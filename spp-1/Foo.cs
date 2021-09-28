@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace spp_1
 {
@@ -13,15 +14,19 @@ namespace spp_1
         {
             _tracer = tracer;
             _bar = new Bar(_tracer);
+            MyMethod();
         }
 
         public void MyMethod()
         {
             _tracer.StartTrace();
-            //...
-        _bar.InnerMethod();
-           // ...
-        _tracer.StopTrace();
+            Thread.Sleep(200);
+
+            _bar.InnerMethod();
+
+            Thread.Sleep(200);
+
+            _tracer.StopTrace();
         }
     }
 
@@ -37,8 +42,8 @@ namespace spp_1
         public void InnerMethod()
         {
             _tracer.StartTrace();
-           // ...
-        _tracer.StopTrace();
+            Thread.Sleep(400);
+            _tracer.StopTrace();
         }
     }
 }
