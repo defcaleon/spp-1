@@ -21,11 +21,12 @@ namespace spp_1
         public void MyMethod()
         {
             _tracer.StartTrace();
-            Thread.Sleep(200);
+            Thread.Sleep(20);
 
             _bar.InnerMethod();
 
-            Thread.Sleep(200);
+            Thread.Sleep(20);
+            _bar.InnerMethod();
 
             _tracer.StopTrace();
         }
@@ -43,7 +44,16 @@ namespace spp_1
         public void InnerMethod()
         {
             _tracer.StartTrace();
-            Thread.Sleep(400);
+            Thread.Sleep(40);
+            thirdMethod();
+            thirdMethod();
+            _tracer.StopTrace();
+        }
+
+        public void thirdMethod()
+        {
+            _tracer.StartTrace();
+            Thread.Sleep(40);
             _tracer.StopTrace();
         }
     }

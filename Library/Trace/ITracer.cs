@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Library
+﻿namespace Library
 {
     public interface ITracer
     {
@@ -9,8 +7,8 @@ namespace Library
 
         // вызывается в конце замеряемого метода 
         void StopTrace();
-    
-    // получить результаты измерений  
-        TraceResult GetTraceResult();
+
+        // получить результаты измерений  
+        ITraceResult GetTraceResult();
     }
 }

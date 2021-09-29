@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading;
 using Library;
+using Library.Serialization;
 
 namespace spp_1
 {
@@ -18,6 +19,7 @@ namespace spp_1
             thread.Start();
             thread.Join();
 
+       
             Console.WriteLine(tracer.GetTraceResult().getResult().Count);
             var result = tracer.GetTraceResult().getResult();
             for (int i = 0; i < result.Count; i++)
@@ -28,6 +30,12 @@ namespace spp_1
                     Console.WriteLine(result.ElementAt(i).Value.ElementAt(j).ToString());
                 }
             }
+
+            ISerialization serializator = new JsonSerialization();
+            var consoleStream = Console.OpenStandardOutput();
+
+            serializator.serialize(consoleStream, tracer.GetTraceResult());
+           
         }
     }
 }

@@ -1,34 +1,53 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Library
 {
-    public class TraceResult
+    class TraceResult : ITraceResult
     {
-        private Dictionary<int, List<Result>> list;
+        private Dictionary<int, ThreadResult> list;
 
         public TraceResult()
         {
-            this.list = new Dictionary<int, List<Result>>();
+            this.list = new Dictionary<int, ThreadResult>();
         }
 
-        public void addResult(Result result, int threadID)
+        internal void incrementCounter(int threadID)
         {
             if (!list.ContainsKey(threadID))
             {
-                list.Add(threadID, new List<Result>());
+                list.Add(threadID, new ThreadResult());
             }
-            list[threadID].Add(result);
+            list[threadID].incrementCounter();
+
+        }
+        internal void decrementCounter(int threadID)
+        {
+            if (!list.ContainsKey(threadID))
+            {
+                list.Add(threadID, new ThreadResult());
+            }
+            list[threadID].decrementCounter();
+
+        }
+
+        internal void addResult(Result result, int threadID)
+        {
+            if (!list.ContainsKey(threadID))
+            {
+                list.Add(threadID, new ThreadResult());
+            }
+            list[threadID].add(result);
         }
 
         public Dictionary<int, List<Result>> getResult()
         {
+
             Dictionary<int, List<Result>> result = new Dictionary<int, List<Result>>();
 
-            foreach (KeyValuePair<int, List<Result>> item in list)
+            foreach (KeyValuePair<int, ThreadResult> item in list)
             {
-                result.Add(item.Key, new List<Result>(item.Value));
+                result.Add(item.Key, new List<Result>(item.Value.list));
+                result[item.Key].Reverse();
             }
             return result;
         }

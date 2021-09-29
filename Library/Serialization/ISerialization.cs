@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Library.Serialization
+﻿namespace Library.Serialization
 {
-    interface ISerialization
+    public interface ISerialization
     {
+        void serialize(System.IO.Stream output, ITraceResult resultList);
     }
 }

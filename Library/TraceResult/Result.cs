@@ -1,25 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Newtonsoft.Json;
+using System;
+using System.Xml.Serialization;
 
 namespace Library
 {
+    [Serializable]
     public class Result
     {
-        private string methodName;
-        private string className;
-        private double executionTime;
+        [XmlAttribute("name")]
+        [JsonProperty("name")]
+        public string methodName;
+        [XmlAttribute("time")]
+        [JsonProperty("time")]
+        public int executionTime;
+        [XmlAttribute("class")]
+        [JsonProperty("class")]
+        public string className;
 
-        public Result(string methodName, string className, double executionTime)
+        [JsonIgnore]
+        [XmlIgnore]
+        public int deep;
+
+        public Result(string methodName, int executionTime, string className)
         {
             this.methodName = methodName;
-            this.className = className;
             this.executionTime = executionTime;
+            this.className = className;
         }
 
         public override string ToString()
         {
-            return  methodName + " " + className + " " + executionTime;
+            return deep + " " + methodName + " " + className + " " + executionTime;
+        }
+
+        public Result()
+        {
         }
     }
 }

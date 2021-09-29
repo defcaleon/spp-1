@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
 using System.Threading;
 
 namespace Library
@@ -15,7 +14,6 @@ namespace Library
         private Stopwatch stopwatch;
         private TraceResult traceResult;
         private Dictionary<int, Stack<TimeSpan>> timeSpans;
-
 
         public static Tracer getInstance()
         {
@@ -39,7 +37,7 @@ namespace Library
             stopwatch.Start();
         }
 
-        public TraceResult GetTraceResult()
+        public ITraceResult GetTraceResult()
         {
             return traceResult;
         }
@@ -47,6 +45,8 @@ namespace Library
         public void StartTrace()
         {
             int id = Thread.CurrentThread.ManagedThreadId;
+
+            traceResult.incrementCounter(id);
 
             if (!timeSpans.ContainsKey(id))
             {
@@ -60,7 +60,9 @@ namespace Library
         {
             TimeSpan timeSpan = stopwatch.Elapsed;
             int threadId = Thread.CurrentThread.ManagedThreadId;
-            double totalMs = timeSpan.TotalMilliseconds - timeSpans[threadId].Pop().TotalMilliseconds;
+            traceResult.decrementCounter(threadId);
+
+            int totalMs = (int)(timeSpan.TotalMilliseconds - timeSpans[threadId].Pop().TotalMilliseconds);
 
             StackTrace frame = new StackTrace(0);
             var method = frame.GetFrame(1).GetMethod();
@@ -68,7 +70,7 @@ namespace Library
             string methodName = method.Name.ToString();
 
 
-            traceResult.addResult(new Result(methodName, className, totalMs), threadId);
+            traceResult.addResult(new Result(methodName, totalMs, className), threadId);
         }
     }
 }

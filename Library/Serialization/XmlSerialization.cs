@@ -1,11 +1,10 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
+using System.Xml.Serialization;
 
 namespace Library.Serialization
 {
-    public class JsonSerialization : ISerialization
+    class XmlSerialization : ISerialization
     {
         public void serialize(Stream output, ITraceResult resultList)
         {
@@ -24,8 +23,8 @@ namespace Library.Serialization
 
 
 
-            string json = JsonConvert.SerializeObject(list, Formatting.Indented);
-            Console.WriteLine(json);
+            XmlSerializer formatter = new XmlSerializer(typeof(List<ResultAndThread>));
+            formatter.Serialize(output, list);
         }
     }
 }
