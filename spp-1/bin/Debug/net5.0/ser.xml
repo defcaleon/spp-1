@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<ArrayOfThread xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Thread id="1" time="1407">
+    <method>
+      <method name="MyMethod" time="287" class="spp_1.Foo" />
+      <childMethods>
+        <method name="InnerMethod" time="122" class="spp_1.Bar" />
+        <childMethods>
+          <method name="thirdMethod" time="40" class="spp_1.Bar" />
+        </childMethods>
+        <childMethods>
+          <method name="thirdMethod" time="40" class="spp_1.Bar" />
+        </childMethods>
+      </childMethods>
+      <childMethods>
+        <method name="InnerMethod" time="123" class="spp_1.Bar" />
+        <childMethods>
+          <method name="thirdMethod" time="40" class="spp_1.Bar" />
+        </childMethods>
+        <childMethods>
+          <method name="thirdMethod" time="40" class="spp_1.Bar" />
+        </childMethods>
+      </childMethods>
+    </method>
+    <method>
+      <method name="MyMethod" time="296" class="spp_1.Foo" />
+      <childMethods>
+        <method name="InnerMethod" time="122" class="spp_1.Bar" />
+        <childMethods>
+          <method name="thirdMethod" time="40" class="spp_1.Bar" />
+        </childMethods>
+        <childMethods>
+          <method name="thirdMethod" time="40" class="spp_1.Bar" />
+        </childMethods>
+      </childMethods>
+      <childMethods>
+        <method name="InnerMethod" time="131" class="spp_1.Bar" />
+        <childMethods>
+          <method name="thirdMethod" time="40" class="spp_1.Bar" />
+        </childMethods>
+        <childMethods>
+          <method name="thirdMethod" time="46" class="spp_1.Bar" />
+        </childMethods>
+      </childMethods>
+    </method>
+  </Thread>
+  <Thread id="5" time="693">
+    <method>
+      <method name="MyMethod" time="288" class="spp_1.Foo" />
+      <childMethods>
+        <method name="InnerMethod" time="123" class="spp_1.Bar" />
+        <childMethods>
+          <method name="thirdMethod" time="40" class="spp_1.Bar" />
+        </childMethods>
+        <childMethods>
+          <method name="thirdMethod" time="40" class="spp_1.Bar" />
+        </childMethods>
+      </childMethods>
+      <childMethods>
+        <method name="InnerMethod" time="122" class="spp_1.Bar" />
+        <childMethods>
+          <method name="thirdMethod" time="40" class="spp_1.Bar" />
+        </childMethods>
+        <childMethods>
+          <method name="thirdMethod" time="40" class="spp_1.Bar" />
+        </childMethods>
+      </childMethods>
+    </method>
+  </Thread>
+</ArrayOfThread>

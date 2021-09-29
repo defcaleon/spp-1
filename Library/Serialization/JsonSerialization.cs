@@ -25,7 +25,9 @@ namespace Library.Serialization
 
 
             string json = JsonConvert.SerializeObject(list, Formatting.Indented);
-            Console.WriteLine(json);
+            var stream = new StreamWriter(output);
+            stream.AutoFlush = true;
+            stream.Write(json);
         }
     }
 }

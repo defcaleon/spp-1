@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using Library;
@@ -31,11 +32,25 @@ namespace spp_1
                 }
             }
 
-            ISerialization serializator = new JsonSerialization();
+            
             var consoleStream = Console.OpenStandardOutput();
 
+            ISerialization serializator = new JsonSerialization();
             serializator.serialize(consoleStream, tracer.GetTraceResult());
-           
+
+            using (FileStream fs = new FileStream("ser.json", FileMode.OpenOrCreate))
+            {
+                serializator.serialize(fs, tracer.GetTraceResult());
+            }
+
+            serializator = new XmlSerialization();
+
+            serializator.serialize(consoleStream, tracer.GetTraceResult());
+
+            using (FileStream fs = new FileStream("ser.xml", FileMode.OpenOrCreate))
+            {
+                serializator.serialize(fs, tracer.GetTraceResult());
+            }
         }
     }
 }

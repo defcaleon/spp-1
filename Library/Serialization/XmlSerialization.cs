@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 
 namespace Library.Serialization
 {
-    class XmlSerialization : ISerialization
+    public class XmlSerialization : ISerialization
     {
         public void serialize(Stream output, ITraceResult resultList)
         {
